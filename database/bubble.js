@@ -8,3 +8,7 @@ const bubbleSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+const Bubble = mongoose.model("Bubble", bubbleSchema);
+
+module.exports = Bubble;
