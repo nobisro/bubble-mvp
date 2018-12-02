@@ -1,5 +1,6 @@
 body {
   height: 100px;
+  width: 100%;
   padding: 0px;
   justify-content: stretch;
   align-items: center;
@@ -23,4 +24,27 @@ body {
   width: 150px;
   height: 150px;
   background: #fff;
+}
+
+.textBox {
+  width: 150px;
+  height: 150px;
+  border: 3px solid brown;
+  border-radius: 10px;
+}
+
+.form {
+  background-color: blue;
+}
+
+.bubble {
+  width: 150px;
+  height: 150px;
+  border-radius: 50px;
+}
+
+.formSubmit {
+  font-size: 36pt;
+  width: 50px;
+  height: 25px;
 }
