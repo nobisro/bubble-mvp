@@ -1,37 +1,43 @@
-// const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require("path");
-// const css = require('./test.css').toString();
-
-const SRC_DIR = path.join(__dirname, "/client/src");
-const DIST_DIR = path.join(__dirname, "/client/dist");
-
+var webpack = require("webpack");
+var path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 module.exports = {
-  entry: `${SRC_DIR}/App.jsx`,
+  entry: path.resolve(__dirname, "app.js"),
   output: {
-    filename: "bundle.js",
-    path: DIST_DIR
+    path: __dirname + "/dist",
+    publicPath: "/",
+    filename: "bundle.js"
   },
   module: {
     rules: [
       {
-        test: /\.jsx?/,
-        include: SRC_DIR,
+        test: [/\.js$/, /\.jsx$/],
         exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-          presets: ["react", "env"]
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"]
+          }
         }
+      },
+      {
+        test: /\.css$/,
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }]
       }
     ]
   },
   resolve: {
     extensions: [".js", ".jsx"]
   },
-  mode: "development",
   devServer: {
-    contentBase: path.join(__dirname, "public/"),
-    port: 3030,
-    publicPath: "http://localhost:3000/dist/",
-    hotOnly: true
-  }
+    contentBase: path.join(__dirname, "public"),
+    hotOnly: true,
+    port: 3003
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./public/index.html",
+      filename: "./index.html"
+    })
+  ]
 };
