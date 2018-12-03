@@ -12,12 +12,12 @@
 import React from "react";
 import posed from "react-pose";
 import { render } from "react-dom";
-import Box from "./Box.jsx";
-import TextBox from "./TextBox.jsx";
-import DraggableText from "./TextBox2.jsx";
+// import Box from "./Box.jsx";
+// import TextBox from "./TextBox.jsx";
+// import DraggableText from "./TextBox2.jsx";
 import Form from "./Form.jsx";
 import style from "../style.css";
-import Bubble from "./Bubble.jsx"
+import Bubble from "./Bubble.jsx";
 
 class App extends React.Component {
   constructor() {
@@ -49,20 +49,17 @@ class App extends React.Component {
     this.setState({ fizz: updatedFizz });
   }
   render() {
-    let bubbles = this.state.fizz.map(bubble, id => {
-      return (
-        <Bubble text={bubble} id={id}>
-      )
+    let bubbles = this.state.fizz.map((bubble, id) => {
+      return <Bubble text={bubble} id={id} />;
     });
+
     return (
       <React.Fragment>
         <Form handleChange={this.handleChange} handleSave={this.handleSave} />
+        <div>{bubbles}</div>
       </React.Fragment>
-      
     );
   }
 }
 
 export default App;
-// render(<App />, document.getElementById("root"));
-//<TextBox className="textBox" />
