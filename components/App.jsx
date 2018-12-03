@@ -34,14 +34,19 @@ export default function App() {
 
   function handleSave(bubble) {
     console.log("fizz len: ", fizz.length);
-    axios
-      .post("/api/bubbles", { body: bubble, color: "blue" })
-      .then(response => {
-        let updatedFizz = fizz;
-        updatedFizz.push(bubble);
-        setFizz(updatedFizz);
-        console.log("line 42");
-      });
+    axios.post("/api/bubbles", { body: bubble, color: "blue" }).then(bubble => {
+      let updatedFizz = fizz;
+      updatedFizz.push(bubble.body);
+      setFizz(updatedFizz);
+      console.log("~~~~post finished");
+    });
+    // .then(response => {
+    //   let updatedFizz = fizz;
+    //   updatedFizz.push(bubble);
+    //   console.log("updatedFizz len: ", updatedFizz.length);
+    //   setFizz(updatedFizz);
+    //   console.log("line 42");
+    // });
   }
 
   function clearAll() {
