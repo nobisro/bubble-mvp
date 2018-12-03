@@ -1,15 +1,4 @@
-// import react from "react";
-// import reactDOM from "react-dom";
-// import posed from "react-pose";
-// impor../../components/Box from "./Box";
-
-// // const App = () => <Box className="box" />;
-// const App = () => <h1>HEY</h1>;
-
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(<App />, rootElement);
-
-import React from "react";
+import React,  from "react";
 import posed from "react-pose";
 import { render } from "react-dom";
 import Form from "./Form.jsx";
@@ -27,7 +16,9 @@ class App extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.clearAll = this.clearAll.bind(this);
   }
+
 
   save(bubble) {
     this.setState({
@@ -36,25 +27,38 @@ class App extends React.Component {
   }
 
   handleChange(e) {
-    console.log(e.target.value);
+    console.log(e.target);
     this.setState({
       bubble: e.target.value
     });
   }
 
-  handleSave() {
+  handleSave(e) {
+    console.log(e);
     let updatedFizz = this.state.fizz;
     updatedFizz.push(this.state.bubble);
     this.setState({ fizz: updatedFizz });
   }
+
+  clearAll() {
+    console.log("all clear");
+    this.setState({
+      fizz: []
+    });
+  }
+
   render() {
     let bubbles = this.state.fizz.map((bubble, id) => {
-      console.log(bubble);
+      // console.log(bubble);
       return <Bubble text={bubble} id={id} />;
     });
     return (
       <React.Fragment>
-        <Header handleChange={this.handleChange} handleSave={this.handleSave} />
+        <Header
+          clearAll={this.clearAll}
+          handleChange={this.handleChange}
+          handleSave={this.handleSave}
+        />
 
         {bubbles}
       </React.Fragment>
