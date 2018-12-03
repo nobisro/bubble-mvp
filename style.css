@@ -1,14 +1,36 @@
-body {
+/* body {
+  position: fixed;
   height: 100px;
   width: 100%;
   padding: 0px;
   justify-content: stretch;
   align-items: center;
   display: flex;
-  background-image: linear-gradient(-180deg, #a5ff36 0%, #09ca92 100%);
+  background-image: linear-gradient(180deg, #a5ff36 60%, #09ca92 60%); 
+  background-image: linear-gradient(
+    -90deg,
+    rgba(200, 100, 200) 75%,
+    rgba(10, 55, 220) 25%
+  ); 
+} */
+html {
+  height: 100%;
 }
-
-#root {
+body {
+  display: flex;
+  /* background: repeating-linear-gradient(#17e4fa, #0061f4, #17e4fa); */
+  background: linear-gradient(
+    to bottom,
+    #b4ddb4 0%,
+    #83c783 17%,
+    #52b152 33%,
+    #086a08 67%,
+    #005157 80%,
+    #001e3e 100%
+  );
+  text-align: center;
+}
+/* #root {
   color: #fff;
   font-size: 32px;
   font-family: PT Sans, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -18,33 +40,106 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
-}
-
-.box {
-  width: 150px;
-  height: 150px;
-  background: #fff;
-}
-
-.textBox {
-  width: 150px;
-  height: 150px;
-  border: 3px solid brown;
-  border-radius: 10px;
-}
+} */
 
 .form {
-  background-color: blue;
+  display: block;
+  margin-right: 10rem;
+  float: right;
+  width: 15rem;
+  height: 3rem;
+  background-color: orange;
+  border: 5px dotted black;
 }
 
-.bubble {
-  width: 150px;
-  height: 150px;
-  border-radius: 50px;
+.xs-bubble {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(245, 245, 245, 10);
+  border-radius: 40px;
+  box-shadow: black;
+  font-family: sans-serif;
 }
 
-.formSubmit {
+.sm-bubble {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
+  width: 75px;
+  height: 75px;
+  background-color: rgba(245, 245, 245, 10);
+  border-radius: 75px;
+  box-shadow: black;
+  font-family: sans-serif;
+}
+
+.m-bubble {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
+  width: 125px;
+  height: 125px;
+  background-color: rgba(245, 245, 245, 10);
+  border-radius: 125px;
+  box-shadow: black;
+  font-family: sans-serif;
+}
+
+.lg-bubble {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(245, 245, 245, 10);
+  border-radius: 200px;
+  box-shadow: black;
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+.xl-bubble {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto;
+  width: 300px;
+  height: 300px;
+  background-color: rgba(245, 245, 245, 10);
+  border-radius: 300px;
+  box-shadow: black;
+  font-family: sans-serif;
+}
+
+/* .formSubmit {
   font-size: 36pt;
   width: 50px;
   height: 25px;
+} */
+
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
