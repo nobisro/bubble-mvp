@@ -2,6 +2,23 @@ import React from "react";
 import reactDOM from "react-dom";
 import axios from "axios";
 
+/*
+
+    <button
+          onClick={e => {
+            // e.preventDefault();
+            this.props.handleSave();
+          }}
+          className="formSubmit"
+        </button>
+
+
+                {/* <textarea
+          id="text-area"
+          // onChange={e => this.handleChange(e)}
+          placeholder="What's up, doc?"
+        /> */
+
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -22,27 +39,25 @@ class Form extends React.Component {
   }
 
   handleChange(e) {
-    console.log(e.target.value);
+    console.log(e);
   }
 
   render() {
     return (
       <form
         className="form"
-        onClick={e => {
-          e.preventDefault();
-          this.props.handleSave();
-        }}
         onChange={e => {
           this.props.handleChange(e);
         }}
       >
-        <textarea
-          id="text-area"
-          // onChange={e => this.handleChange(e)}
-          placeholder="What's up, doc?"
+        <input type="text" />
+        <input
+          type="submit"
+          onClick={e => {
+            e.preventDefault();
+            this.props.handleSave();
+          }}
         />
-        <button className="formSubmit">save</button>
       </form>
     );
   }
