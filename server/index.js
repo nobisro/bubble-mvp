@@ -24,15 +24,30 @@ app.get("/api/bubbles", (req, res) => {
     .then(bubbles => {
       console.log("bubbles queried successfully");
       res.send(bubbles);
+    })
+    .catch(err => {
+      console.Error("error getting bubbles");
     });
 });
 
 app.post("/api/bubbles", (req, res) => {
-  let bubble = req.body;
-  Bubble.create(bubble).then(() => {
-    console.log("bubble created");
-    db.disconnect();
-  });
+  const bubble = new Bubble(req.body);
+  bubble
+    .save(bubble)
+    .then(bubble => {
+      console.log("bubbles?: ", bubble);
+      res.send(bubble);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
+  // Bubble.save(bubble)
+  //   .exec()
+  //   .then(response => {
+  //     console.log(response);
+  //     console.log("bubble created");
+  //   });
 });
 
 app.delete("/api/bubbles", (req, res) => {
