@@ -19,12 +19,8 @@ import axios from "axios";
           placeholder="What's up, doc?"
         /> */
 
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  postToDatabase() {
+export default function Form(props) {
+  function postToDatabase() {
     const bubble = {
       body: document.getElementById("bubble-body")
     };
@@ -38,29 +34,27 @@ class Form extends React.Component {
       });
   }
 
-  handleChange(e) {
-    console.log(e);
-  }
-
-  render() {
-    return (
-      <form
-        className="form"
-        onChange={e => {
-          this.props.handleChange(e);
+  return (
+    <form
+      className="form"
+      onChange={e => {
+        props.handleChange(e);
+      }}
+    >
+      <input id="input-text" type="text" />
+      <input
+        type="submit"
+        onClick={e => {
+          e.preventDefault();
+          props.handleSave(document.getElementById("input-text").value);
         }}
-      >
-        <input type="text" />
-        <input
-          type="submit"
-          onClick={e => {
-            e.preventDefault();
-            this.props.handleSave();
-          }}
-        />
-      </form>
-    );
-  }
+      />
+      <input
+        type="reset"
+        onClick={() => {
+          props.clearAll();
+        }}
+      />
+    </form>
+  );
 }
-
-export default Form;
