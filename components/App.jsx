@@ -1,70 +1,69 @@
-import React,  from "react";
+import React, { useState, useEffect } from "react";
 import posed from "react-pose";
-import { render } from "react-dom";
-import Form from "./Form.jsx";
 import style from "../style.css";
 import Bubble from "./Bubble.jsx";
 import Fizz from "./Fizz.jsx";
 import Header from "./Header.jsx";
+import axios from "axios";
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      bubble: undefined,
-      fizz: []
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSave = this.handleSave.bind(this);
-    this.clearAll = this.clearAll.bind(this);
+export default function App() {
+  const [bubble, setBubble] = useState("");
+  const [fizz, setFizz] = useState([]);
+
+  useEffect(
+    () => {
+      axios
+        .get("/api/bubbles")
+        .then(response => {
+          let temp = [];
+          response.data.forEach(bubble => {
+            temp.push(bubble.body);
+          });
+          setFizz(temp);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    [fizz.length]
+  );
+
+  function handleChange(e) {
+    setBubble(e.target.value);
   }
 
+  function handleSave(bubble) {
+    console.log("fizz len: ", fizz.length);
+    axios
+      .post("/api/bubbles", { body: bubble, color: "blue" })
+      .then(response => {
+        let updatedFizz = fizz;
+        updatedFizz.push(bubble);
+        setFizz(updatedFizz);
+        console.log("line 42");
+      });
+  }
 
-  save(bubble) {
-    this.setState({
-      newBubble: bubble
+  function clearAll() {
+    axios.delete("/api/bubbles").then(response => {
+      console.log(response);
     });
+    setFizz([]);
   }
 
-  handleChange(e) {
-    console.log(e.target);
-    this.setState({
-      bubble: e.target.value
-    });
-  }
+  let bubbles = fizz.map((bubble, id) => {
+    return <Bubble text={bubble} id={id} />;
+  });
 
-  handleSave(e) {
-    console.log(e);
-    let updatedFizz = this.state.fizz;
-    updatedFizz.push(this.state.bubble);
-    this.setState({ fizz: updatedFizz });
-  }
+  return (
+    <React.Fragment>
+      <Header
+        clearAll={clearAll}
+        handleChange={handleChange}
+        handleSave={handleSave}
+      />
 
-  clearAll() {
-    console.log("all clear");
-    this.setState({
-      fizz: []
-    });
-  }
-
-  render() {
-    let bubbles = this.state.fizz.map((bubble, id) => {
-      // console.log(bubble);
-      return <Bubble text={bubble} id={id} />;
-    });
-    return (
-      <React.Fragment>
-        <Header
-          clearAll={this.clearAll}
-          handleChange={this.handleChange}
-          handleSave={this.handleSave}
-        />
-
-        {bubbles}
-      </React.Fragment>
-    );
-  }
+      {bubbles}
+    </React.Fragment>
+  );
 }
-
-export default App;
-/// <Fizz bubbles={this.state.fizz} />
