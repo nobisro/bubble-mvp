@@ -1,27 +1,49 @@
 import React from "react";
 import reactDOM from "react-dom";
+import axios from "axios";
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  postData() {
-    const sticky = {
-      body: $('#post-body').val(),
-    }
+  postToDatabase() {
+    const bubble = {
+      body: document.getElementById("bubble-body")
+    };
+    axios
+      .post("/api/post", bubble)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  handleChange(e) {
+    console.log(e.target.value);
   }
 
   render() {
     return (
-      <div className="bubble">
-      <form className="form" onSubmit={this.postData}>
-        <textarea placeholder="What's up, doc?" />
-        <button className="formSubmit" type="submit">
-          save
-        </button>
+      <form
+        className="form"
+        onClick={e => {
+          e.preventDefault();
+          this.props.handleSave();
+        }}
+        onChange={e => {
+          this.props.handleChange(e);
+        }}
+      >
+        <textarea
+          id="text-area"
+          // onChange={e => this.handleChange(e)}
+          placeholder="What's up, doc?"
+        />
+        <button className="formSubmit">save</button>
       </form>
-      <div>
     );
   }
 }
