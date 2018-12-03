@@ -1,22 +1,14 @@
 import React from "react";
 import Form from "./Form.jsx";
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className="topnav">
-        <a href="#signup">Sign up></a>
-        <a href="#login">Login></a>
-        <Form
-          handleChange={this.props.handleChange}
-          handleSave={this.props.handleSave}
-        />
-      </div>
-    );
-  }
+export default function Header(props) {
+  return (
+    <div className="">
+      <Form
+        handleChange={props.handleChange}
+        handleSave={props.handleSave}
+        clearAll={props.clearAll}
+      />
+    </div>
+  );
 }
-
-export default Header;
