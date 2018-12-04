@@ -34,6 +34,10 @@ export default function Form(props) {
       });
   }
 
+  function generatePlaceholder() {
+    return "Whoever proofread Hitler's speeches was a literal grammar nazi";
+  }
+
   return (
     <form
       className="form"
@@ -41,12 +45,14 @@ export default function Form(props) {
         props.handleChange(e);
       }}
     >
-      <input id="input-text" type="text" />
+      <input id="input-text" type="text" placeholder={generatePlaceholder()} />
       <input
         type="submit"
         onClick={e => {
           e.preventDefault();
-          props.handleSave(document.getElementById("input-text").value);
+          let text = document.getElementById("input-text").value;
+          props.handleSave(text);
+          text = "";
         }}
       />
       <input
@@ -55,6 +61,11 @@ export default function Form(props) {
           props.clearAll();
         }}
       />
+
+      <span>
+        <br />
+        Thought Bubbles
+      </span>
     </form>
   );
 }

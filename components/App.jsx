@@ -18,9 +18,12 @@ export default function App() {
         .then(response => {
           console.log(response);
           let temp = [];
-          response.data.forEach(bubble => {
-            temp.push(bubble.body);
-          });
+          if (response.data) {
+            response.data.forEach(bubble => {
+              temp.push({ body: bubble.body, id: bubble._id });
+            });
+          }
+          console.log("temp: ", temp);
           setFizz(temp);
         })
         .catch(error => {
@@ -35,7 +38,7 @@ export default function App() {
   }
 
   function handleSave(bubble) {
-    axios.post("/api/bubbles", { body: bubble, id: "blue" }).then(bubble => {
+    axios.post("/api/bubbles", { body: bubble }).then(bubble => {
       let updatedFizz = fizz;
       updatedFizz.push(bubble.body);
       setFizz(updatedFizz);
@@ -55,25 +58,29 @@ export default function App() {
   }
 
   function handleBubbleClick(id) {
-    let updatedFizz = fizz;
-    updatedFizz = updatedFizz.filter((bubble, element) => {
-      id !== element;
+    let updatedFizz = fizz.filter(bubble => {
+      return bubble.id !== id;
     });
-    console.log(updatedFizz);
-    console.log(fizz);
+    axios.put(`/api/bubbles/${id}`, { id: id }).then(success => {
+      console.log("success: ", success);
+      setFizz(updatedFizz);
+    });
   }
 
   let bubbles = fizz.map((bubble, id) => {
-    return (
-      <Bubble text={bubble} id={id} handleBubbleClick={handleBubbleClick}>
-        <input>hello</input>
-      </Bubble>
-    );
+    if (bubble && bubble.body) {
+      return (
+        <Bubble
+          text={bubble.body}
+          id={bubble.id}
+          handleBubbleClick={handleBubbleClick}
+        />
+      );
+    }
   });
 
   return (
     <React.Fragment>
-      {" "}
       <Header
         clearAll={clearAll}
         handleChange={handleChange}

@@ -32,19 +32,26 @@ const Bubble = React.forwardRef((props, ref) => {
         ref={ref}
         {...props}
         className={`bubble ${findClass()}`}
-        onClick={() => {
-          props.text.handleBubbleClick(props.text.id);
-        }}
         type="text"
-        value={text}
+        // value={text}
+        value={
+          <input
+            onClick={() => {
+              console.log("input field clicked");
+            }}
+          >
+            {text}
+          </input>
+        }
         onChange={handleChange}
       >
         {props.text.text}
         <div
-          class="bubble-button"
+          className="bubble-button"
           onClick={() => {
+            props.text.handleBubbleClick(props.text.id);
             // props.text.handleBubbleClick(props.text.id)
-            console.log(props.text.id);
+            // props.text.handleBubbleClick(props.text.id);
           }}
         >
           x
