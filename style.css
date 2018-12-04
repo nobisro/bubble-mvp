@@ -22,12 +22,12 @@ body {
   /* background: repeating-linear-gradient(#17e4fa, #0061f4, #17e4fa); */
   background: linear-gradient(
     to bottom,
-    #b4ddb4 0%,
-    #83c783 17%,
-    #52b152 33%,
-    #086a08 67%,
-    #005157 80%,
-    #001e3e 100%
+    #acedfc 0%,
+    #71d3e4 17%,
+    #47aaac 33%,
+    #08646a 67%,
+    #00549a 80%,
+    #0224e3 100%
   );
   text-align: center;
 }
@@ -44,13 +44,20 @@ body {
 } */
 
 .form {
+  justify-content: center;
+  margin: 0 auto;
+  z-index: 999;
+  position: fixed;
   display: block;
   margin-right: 10rem;
   float: right;
-  width: 15rem;
+  width: 600px;
   height: 3rem;
-  background-color: orange;
+  background-color: rgb(249, 249, 164);
   border: 5px dotted black;
+  font-family: "Courgette", cursive;
+  font-size: 1.3rem;
+  padding-bottom: 20px;
 }
 .xs {
   width: 30px;
@@ -92,14 +99,23 @@ body {
   box-shadow: black;
   font-family: sans-serif;
   word-wrap: break-word;
+  border: 3px solid rgba(249, 249, 249, 0.591);
+
+  animation: animateBubble 18s linear infinite,
+    sideWays 2.5s ease-in-out infinite alternate;
+
+  left: -25%;
+  top: 25%;
+
+  transform: scale(0.6);
 }
 
-.topnav {
+/* .topnav {
   overflow: hidden;
   background-color: #e9e9e9;
   width: 100%;
   border: 1px solid black;
-}
+} */
 
 .topnav a {
   float: left;
@@ -109,4 +125,34 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+}
+
+.bubble-button {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  color: red;
+}
+
+#input-text {
+  width: 375px;
+  padding-right: 15px;
+}
+
+@keyframes animateBubble {
+  0% {
+    margin-top: 700px;
+  }
+  100% {
+    margin-top: -120%;
+  }
+}
+
+@keyframes sideWays {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 50px;
+  }
 }
