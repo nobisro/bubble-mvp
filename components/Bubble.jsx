@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import reactDOM from "react-dom";
 import posed from "react-pose";
 import style from "../style.css";
+import { spring } from "popmotion";
 
 const Bubble = React.forwardRef((props, ref) => {
+  const [text, setText] = useState(props.text.text);
+  //   console.log("props.text.children.props: ", props.text.children.props);
   function findClass() {
     let len = props.text.text ? props.text.text.length : 5;
     if (len < 5) {
@@ -18,10 +21,36 @@ const Bubble = React.forwardRef((props, ref) => {
       return "xl";
     }
   }
+
+  function handleChange(event) {
+    console.log("event");
+    setText(event.target.value);
+  }
   return (
-    <div ref={ref} {...props} className={`bubble ${findClass()}`}>
-      {props.text.text}
-    </div>
+    <React.Fragment>
+      <div
+        ref={ref}
+        {...props}
+        className={`bubble ${findClass()}`}
+        onClick={() => {
+          props.text.handleBubbleClick(props.text.id);
+        }}
+        type="text"
+        value={text}
+        onChange={handleChange}
+      >
+        {props.text.text}
+        <div
+          class="bubble-button"
+          onClick={() => {
+            // props.text.handleBubbleClick(props.text.id)
+            console.log(props.text.id);
+          }}
+        >
+          x
+        </div>
+      </div>
+    </React.Fragment>
   );
 });
 
@@ -31,7 +60,7 @@ const PosedBubble = posed(Bubble)({
   hoverable: true,
   hover: {
     scale: 1.2,
-    boxShadow: "0px 5px 10px rgba(0,0,0,0.2)"
+    boxShadow: "0px 8px 12px rgba(0,0,0,0.3)"
   },
   init: {
     scale: 1,
@@ -39,7 +68,7 @@ const PosedBubble = posed(Bubble)({
   }
 });
 
-const Wrapper = (text, id) => {
+const Wrapper = (text, id, handleBubbleClick) => {
   return <PosedBubble text={text} id={id} className="bubble" />;
 };
 
@@ -55,3 +84,17 @@ export default Wrapper;
 //     drag: { scale: 1.2 },
 //     dragEnd: { scale: 1.0 }
 //   }
+
+/*
+  draggable: true,
+  pressable: true,
+  hoverable: true,
+  hover: {
+    scale: 1.2,
+    boxShadow: "0px 10px 15px rgba(0,0,0,0.3)"
+  },
+  init: {
+    scale: 1,
+    boxShadow: "0px 0px 0px rgba(0,0,0,0)"
+  },
+*/
