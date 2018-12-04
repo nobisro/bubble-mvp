@@ -50,6 +50,15 @@ app.post("/api/bubbles", (req, res) => {
   //   });
 });
 
+app.put("/api/bubbles/:id", (req, res) => {
+  Bubble.deleteOne({ _id: req.body.id })
+    .exec()
+    .then(success => {
+      console.log("----deleted one------");
+      res.send(success);
+    });
+});
+
 app.delete("/api/bubbles", (req, res) => {
   Bubble.deleteMany({})
     .exec()
